@@ -1,0 +1,42 @@
+components/execd/pkg/runtime/pty_session_windows.go
+  5163eafea9737331 31-33
+components/execd/pkg/runtime/pty_session.go
+  5163eafea9737331 37-39
+components/execd/pkg/web/controller/pty_controller.go
+  5163eafea9737331 42-50
+components/execd/pkg/web/model/error.go
+  5163eafea9737331 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.20",
+  "base_commit_sha": "9beee6977b32e7c35860838aff53457ca0ed541f",
+  "prompts": {
+    "5163eafea9737331": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f8114e45-12c5-48c5-aaa1-1a14b2063bf2",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 16,
+      "total_deletions": 0,
+      "accepted_lines": 16,
+      "overriden_lines": 0
+    },
+    "fa92bf49462e10b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b6be477-a67e-40cd-bdae-7086275737b1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 561,
+      "overriden_lines": 0
+    }
+  }
+}
