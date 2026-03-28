@@ -1,0 +1,385 @@
+components/execd/pkg/web/model/error.go
+  5163eafea9737331 29
+components/execd/pkg/web/controller/pty_controller.go
+  5163eafea9737331 42-50
+components/execd/pkg/runtime/pty_session_windows.go
+  5163eafea9737331 31-33
+components/execd/pkg/web/controller/pty_ws.go
+  e59239b8fb8913ec 18-19,164-170,211-212,214-216,223,225-230,244,249,281-282,290-294,296-301,306-326,328-332
+components/execd/pkg/web/model/pty_ws.go
+  e59239b8fb8913ec 39-46
+components/execd/pkg/web/controller/pty_ws_test.go
+  e59239b8fb8913ec 21,23-24,116-117,119-143,151-152,168-169,173,181,184-187,314-315,318-320
+components/execd/pkg/runtime/pty_session.go
+  5163eafea9737331 37-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.20",
+  "base_commit_sha": "3e6e6e36348ca5820e853736f2895cbfb2067cfe",
+  "prompts": {
+    "5163eafea9737331": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f8114e45-12c5-48c5-aaa1-1a14b2063bf2",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 16,
+      "total_deletions": 0,
+      "accepted_lines": 16,
+      "overriden_lines": 0
+    },
+    "7f9d92dbca13216a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4f8f38c-01aa-4a5b-8614-d257def49c4f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 2504,
+      "total_deletions": 338,
+      "accepted_lines": 1401,
+      "overriden_lines": 0
+    },
+    "e59239b8fb8913ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "23d01af8-aa24-4dc3-891e-0ded19e91dc9",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null,
+      "messages": [],
+      "total_additions": 115,
+      "total_deletions": 72,
+      "accepted_lines": 115,
+      "overriden_lines": 0
+    },
+    "f9c7c24dcd4d6925": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f901a44-75fc-4bc3-b02f-e1ad04f329ca",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null,
+      "messages": [],
+      "total_additions": 303,
+      "total_deletions": 0,
+      "accepted_lines": 303,
+      "overriden_lines": 0
+    },
+    "fa92bf49462e10b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b6be477-a67e-40cd-bdae-7086275737b1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [
+        {
+          "type": "user",
+          "text": "analizy since git history start with 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5 (feature add websocket pty to execd).\nand artifact the PRD document and design document, so we can re impl it. beacuse the current branch is will be drop it.",
+          "timestamp": "2026-03-28T02:13:03.448Z"
+        },
+        {
+          "type": "user",
+          "text": "analizy since git history start with 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5 (feature add websocket pty to execd).\nand artifact the PRD document and design document, so we can re impl it. beacuse the current branch is will be drop it.",
+          "timestamp": "2026-03-28T02:13:26.294Z"
+        },
+        {
+          "type": "assistant",
+          "text": "<thinking>\nThe user wants me to analyze the git history starting from commit `381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5` and create PRD (Product Requirements Document) and Design documents based on what was implemented, so they can re-implement it on a new branch.\n\nLet me use the git-ai-search skill to help with this, or I can just use git commands to analyze the history. Let me first look at the git log from that commit to the current state.\n</thinking>",
+          "timestamp": "2026-03-28T02:13:42.882Z"
+        },
+        {
+          "type": "user",
+          "text": "go ahead and analyze the git history",
+          "timestamp": "2026-03-28T02:13:50.660Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git log --oneline 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5..HEAD 2>/dev/null | head -60",
+            "description": "Show git log from starting commit to HEAD"
+          },
+          "timestamp": "2026-03-28T02:13:55.453Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5 --stat 2>/dev/null",
+            "description": "Show the starting commit details"
+          },
+          "timestamp": "2026-03-28T02:14:00.365Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "for commit in 8c4c6f0 c431dbb 5a6b006 809d421 2592a7e 9efbdf0 51128dc 3561735 cd3ccaf 2f161bc 0bb16a7 c4214b1 de472b6 d9c68bb 036c508 6d32a7b; do\n  echo \"=== $commit ===\"\n  git show $commit --stat --format=\"%s%n%b\" 2>/dev/null | head -30\n  echo \"\"\ndone",
+            "description": "Show details for each commit in the feature branch"
+          },
+          "timestamp": "2026-03-28T02:14:07.884Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git diff 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5..HEAD --name-only 2>/dev/null",
+            "description": "List all changed files across the feature branch"
+          },
+          "timestamp": "2026-03-28T02:14:17.953Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/runtime/types.go 2>/dev/null",
+            "description": "Read final types.go"
+          },
+          "timestamp": "2026-03-28T02:14:23.276Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/model/session_ws.go 2>/dev/null",
+            "description": "Read final WS model"
+          },
+          "timestamp": "2026-03-28T02:14:23.278Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/router.go 2>/dev/null",
+            "description": "Read final router.go"
+          },
+          "timestamp": "2026-03-28T02:14:23.641Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/controller/session_ws.go 2>/dev/null",
+            "description": "Read final session_ws.go controller"
+          },
+          "timestamp": "2026-03-28T02:14:29.568Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/runtime/replay_buffer.go 2>/dev/null",
+            "description": "Read final replay_buffer.go"
+          },
+          "timestamp": "2026-03-28T02:14:29.719Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/runtime/bash_session.go 2>/dev/null",
+            "description": "Read final bash_session.go"
+          },
+          "timestamp": "2026-03-28T02:14:35.260Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/controller/codeinterpreting.go 2>/dev/null | head -100",
+            "description": "Read session REST endpoints in codeinterpreting.go"
+          },
+          "timestamp": "2026-03-28T02:14:36.293Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/controller/codeinterpreting.go 2>/dev/null | grep -A 200 \"CreateSession\"",
+            "description": "Read session-related endpoints in codeinterpreting.go"
+          },
+          "timestamp": "2026-03-28T02:14:43.009Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show HEAD:components/execd/pkg/web/model/session.go 2>/dev/null",
+            "description": "Read session model"
+          },
+          "timestamp": "2026-03-28T02:14:43.010Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Write",
+          "input": {
+            "content": "# PRD: WebSocket PTY Steering for execd\n\n**Status:** Ready for re-implementation\n**Source:** Analyzed from git history `381bcf8..6d32a7b` (tty-fork branch, to be dropped)\n\n---\n\n## 1. Background\n\n`execd` is a sandboxed code-execution daemon. Before this feature, the only way to interact with a bash session was via the fire-and-forget `POST /session/:id/run` SSE endpoint. That model does not support:\n\n- Interactive programs (shells, REPLs, vim, htop) that expect a terminal\n- Real-time stdin injection mid-execution\n- Cursor-control / ANSI escape sequences (PTY echo, colors, progress bars)\n- Persistent shell state between two WS connections (reconnect)\n\n## 2. Goals\n\n| # | Goal |\n|---|------|\n| G1 | Provide a persistent, bidirectional WebSocket channel per bash session for stdin/stdout/stderr steering |\n| G2 | Support both **pipe mode** (separate stdout/stderr pipes, text-only) and **PTY mode** (full terminal emulation via `/dev/ptmx`) selectable at connection time |\n| G3 | Allow clients to **reconnect** to a live session and replay any output missed while disconnected |\n| G4 | Keep existing `POST /session/:id/run` (SSE fire-and-forget) fully operational alongside the WS channel |\n| G5 | No regressions on Windows build (Windows stubs for all new symbols) |\n\n## 3. Non-Goals\n\n- Client-side terminal emulator (xterm.js) — out of scope for execd\n- Multi-client fan-out (only one WS connection per session at a time)\n- Persistent session storage across daemon restarts\n\n## 4. User Stories\n\n**US1 – Interactive shell**\nAs an agent, I want to connect a WebSocket to a bash session and interactively type commands, so that I can run programs that require terminal input (e.g. a Python REPL, `vim`, `ssh`).\n\n**US2 – PTY terminal (full ANSI)**\nAs a client, I want to opt into PTY mode (`?pty=1`) so I receive raw terminal bytes including ANSI escape codes, cursor movements, and color — equivalent to running bash inside a real terminal.\n\n**US3 – Terminal resize**\nAs a client in PTY mode, I want to send a `resize` frame to update the PTY window size, so programs that query `COLUMNS`/`LINES` (e.g. `htop`, `man`) lay out correctly.\n\n**US4 – Signal injection**\nAs a client, I want to send a `signal` frame (e.g. `SIGINT`) to kill or interrupt the running process inside the session, so I can cancel a runaway command.\n\n**US5 – Reconnect with replay**\nAs a client that temporarily loses network connectivity, I want to reconnect and supply `?since=<offset>` to retrieve all output I missed, so I do not have to restart the session.\n\n**US6 – Coexistence with fire-and-forget**\nAs an agent, I want to continue using `POST /session/:id/run` (SSE) to run discrete commands in the same bash session, with all output stored in the replay buffer, so the two modes interoperate.\n\n## 5. Functional Requirements\n\n### 5.1 REST Session Lifecycle\n\n| Method | Endpoint | Description |\n|--------|----------|-------------|\n| POST | `/session` | Create a bash session; returns `session_id` |\n| GET | `/session/:sessionId` | Get session status + current replay buffer offset |\n| POST | `/session/:sessionId/run` | Run code in session (SSE stream); supports `?since=<offset>` for missed-output replay |\n| DELETE | `/session/:sessionId` | Terminate and delete session |\n\n### 5.2 WebSocket Endpoint\n\n`GET /ws/session/:sessionId[?pty=1][&since=<offset>]`\n\n- HTTP 404 returned **before** upgrade if session does not exist\n- HTTP 409 returned if another WS client is already connected\n- Upgrade HTTP → WebSocket (RFC 6455)\n- `?pty=1` — start bash via PTY; omit for pipe mode\n- `?since=<offset>` — replay missed output from that byte offset on first connect\n\n### 5.3 WebSocket Framing Protocol\n\n**Client → Server frames (JSON):**\n\n| `type` | Fields | Action |\n|--------|--------|--------|\n| `stdin` | `data: string` | Write bytes to bash stdin |\n| `signal` | `signal: string` | Send named signal to process group (SIGINT, SIGTERM, SIGKILL, SIGQUIT, SIGHUP) |\n| `resize` | `cols: int`, `rows: int` | Resize PTY window (PTY mode only; silently ignored in pipe mode) |\n| `ping` | — | Application-level keepalive request |\n\n**Server → Client frames (JSON):**\n\n| `type` | Fields | Meaning |\n|--------|--------|---------|\n| `connected` | `session_id`, `mode: \"pipe\"\\|\"pty\"` | First frame after upgrade; confirms mode |\n| `replay` | `data: string`, `offset: int64` | Missed output since requested offset |\n| `stdout` | `data: string`, `timestamp: int64` | Live stdout chunk |\n| `stderr` | `data: string`, `timestamp: int64` | Live stderr chunk (pipe mode only) |\n| `exit` | `exit_code: int` | Process exited |\n| `pong` | — | Response to application-level ping |\n| `error` | `error: string`, `code: string` | Error codes: `SESSION_GONE`, `START_FAILED`, `STDIN_WRITE_FAILED`, `INVALID_FRAME`, `ALREADY_CONNECTED`, `RUNTIME_ERROR` |\n\n### 5.4 Keepalive\n\n- RFC 6455 binary ping every 30 s; 60 s read deadline reset on pong\n- Application-level `ping`/`pong` frames supported in parallel\n\n### 5.5 Reconnect Semantics\n\n1. Client disconnects (network drop or `conn.Close()`)\n2. Bash process stays alive; output continues to accumulate in replay buffer\n3. Client reconnects with `?since=<last_offset>`\n4. Server sends a `replay` frame with all missed bytes, then streams live output\n\n### 5.6 Output Delivery Guarantee\n\n- Output is **written to the replay buffer first**, then fanned out to the active WS connection\n- A client that disconnects and reconnects receives each byte **exactly once** (no duplicates, no gaps)\n- Replay buffer capacity: **1 MiB** (circular); oldest bytes are evicted when full\n\n### 5.7 Output Format\n\n- Chunks are raw bytes (not line-buffered) so PTY control sequences and prompts are delivered immediately without waiting for `\\n`\n- Chunk size: up to **32 KiB** per read\n\n## 6. Non-Functional Requirements\n\n| Category | Requirement |\n|----------|-------------|\n| Concurrency | Race-free under `-race`; all shared state behind mutexes or atomics |\n| Goroutine lifecycle | No goroutine leaks — pump goroutines must exit before WS lock is released on disconnect |\n| File descriptor lifecycle | All `os.Pipe` read/write ends closed when no longer needed |\n| Windows build | Stub implementations for all new `Controller` methods and `BashSession` interface |\n| Test coverage | Unit tests for replay buffer; integration tests for WS connect/reconnect/exit/PTY |\n\n## 7. Acceptance Criteria\n\n- [ ] `GET /ws/session/:id` upgrades to WS and delivers `connected` frame\n- [ ] stdin typed in the client appears as output from bash\n- [ ] `?pty=1` produces ANSI escape sequences in stdout frames\n- [ ] `resize` frame changes PTY dimensions (verified via `stty size` inside bash)\n- [ ] `signal` SIGINT interrupts a running command\n- [ ] Disconnecting and reconnecting with `?since=0` delivers all prior output exactly once\n- [ ] Concurrent `POST /session/:id/run` calls while WS is connected work correctly\n- [ ] `go test -race ./...` passes with no data-race reports\n- [ ] Windows build succeeds (`GOOS=windows go build ./...`)\n",
+            "file_path": "/home/sxf/code/github/OpenSandbox/docs/PRD-websocket-pty.md"
+          },
+          "timestamp": "2026-03-28T02:15:32.829Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Now I have a complete picture. Let me write the PRD and Design documents.",
+          "timestamp": "2026-03-28T02:15:32.830Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Write",
+          "input": {
+            "content": "# Design: WebSocket PTY Steering for execd\n\n**Status:** Ready for re-implementation\n**Companion:** [PRD-websocket-pty.md](./PRD-websocket-pty.md)\n\n---\n\n## 1. Architecture Overview\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│  execd HTTP server (Gin)                                     │\n│                                                              │\n│  /session/*          CodeInterpretingController              │\n│  /ws/session/:id     SessionWebSocket handler                │\n│                                                              │\n│  runtime.Controller                                          │\n│  ├── bashSessionClientMap  sync.Map[sessionID → *bashSession]│\n│  └── *bashSession                                            │\n│       ├── replayBuffer (1 MiB circular)                      │\n│       ├── broadcast goroutine(s)  ← OS pipe / PTY master     │\n│       ├── per-connection io.Pipe  ← AttachOutput()           │\n│       └── bash process (pipe mode or PTY mode)               │\n└─────────────────────────────────────────────────────────────┘\n```\n\n---\n\n## 2. New Files\n\n| File | Purpose |\n|------|---------|\n| `pkg/runtime/replay_buffer.go` | 1 MiB circular replay buffer |\n| `pkg/runtime/replay_buffer_test.go` | Unit tests for replay buffer |\n| `pkg/runtime/bash_session_pty_test.go` | PTY integration tests |\n| `pkg/web/model/session_ws.go` | `ClientFrame` / `ServerFrame` types + error codes |\n| `pkg/web/model/session.go` | Session REST request/response models |\n| `pkg/web/controller/session_ws.go` | `SessionWebSocket` handler |\n| `pkg/web/controller/session_ws_test.go` | WS handler integration tests |\n\n---\n\n## 3. Modified Files\n\n| File | Changes |\n|------|---------|\n| `pkg/runtime/types.go` | Add `BashSession` interface; add WS/PTY fields to `bashSession` struct |\n| `pkg/runtime/bash_session.go` | Add `Start`, `StartPTY`, `AttachOutput`, `LockWS/UnlockWS`, `SendSignal`, `ResizePTY`, `IsPTY`, `Done`, `ExitCode`, `WriteStdin`; broadcast goroutines; replay wiring |\n| `pkg/runtime/bash_session_windows.go` | Windows stubs for all new `Controller` methods |\n| `pkg/runtime/ctrl.go` | Add `GetBashSession` (moved to `bash_session.go` for build-tag correctness) |\n| `pkg/web/controller/codeinterpreting.go` | Add `CreateSession`, `RunInSession`, `GetSessionStatus`, `DeleteSession`; validate session before SSE commit |\n| `pkg/web/router.go` | Register `/session/*` and `/ws/session/:id` routes |\n| `go.mod` / `go.sum` | Add `github.com/gorilla/websocket` and `github.com/creack/pty` |\n\n---\n\n## 4. Data Structures\n\n### 4.1 `replayBuffer`\n\n```go\ntype replayBuffer struct {\n    mu    sync.Mutex\n    buf   []byte  // circular storage, capacity = 1 MiB\n    size  int\n    head  int     // next write position (mod size)\n    total int64   // monotonic byte counter (never resets)\n}\n```\n\n- `write(p []byte)` — append bytes, overwrite oldest on overflow\n- `readFrom(offset int64) ([]byte, int64)` — return bytes from offset to total; clamp to oldest if evicted\n- `Total() int64` — mutex-guarded read of `total`\n\n### 4.2 `BashSession` interface\n\n```go\ntype BashSession interface {\n    LockWS() bool\n    UnlockWS()\n    Start() error\n    StartPTY() error\n    IsRunning() bool\n    ExitCode() int\n    WriteStdin(p []byte) (int, error)\n    AttachOutput() (stdout io.Reader, stderr io.Reader, detach func())\n    Done() <-chan struct{}\n    SendSignal(name string)\n    ResizePTY(cols, rows uint16) error\n    IsPTY() bool\n}\n```\n\n### 4.3 `bashSession` struct additions\n\n```go\n// Separate PIDs to prevent run() from clobbering WS shell tracking\ncurrentProcessPid int   // short-lived run() command\nwsPid             int   // long-lived Start/StartPTY shell\n\nreplay       *replayBuffer\nwsConnected  atomic.Bool    // exclusive WS lock\nlastExitCode int\nstdin        io.WriteCloser\ndoneCh       chan struct{}\n\n// Output broadcast\noutMu    sync.Mutex\nstdoutW  *io.PipeWriter  // current per-connection sink; nil when no client\nstderrW  *io.PipeWriter  // nil in PTY mode\n\n// PTY\nisPTY bool\nptmx  *os.File\n```\n\n---\n\n## 5. Key Design Decisions\n\n### 5.1 Broadcast goroutine pattern (not direct pipe hand-off)\n\n**Problem:** Scanner goroutines block in `Scan()` on the shared OS pipe. When a WS client disconnects, cancelling `ctx` does not unblock `Scan()`. Stale goroutines from the prior connection would still be reading when a new client connects.\n\n**Solution:** `Start()` / `StartPTY()` each launch a **broadcast goroutine** that owns the real OS pipe / PTY master fd. It reads in 32 KiB chunks and:\n1. Always writes to `s.replay`\n2. Writes to `s.stdoutW` / `s.stderrW` (the current per-connection `io.PipeWriter`) if non-nil\n\n`AttachOutput()` creates a fresh `io.Pipe` per connection and swaps in the `PipeWriter`. `detach()` closes the `PipeWriter`, sending EOF to the handler's reader — unblocking it immediately without touching the OS pipe.\n\n**Teardown order in handler:**\n```\ncancel() → detach() → pumpWg.Wait() → UnlockWS()\n```\nThis guarantees no stale goroutine is reading when a new client arrives.\n\n### 5.2 Replay-then-attach ordering\n\n**Invariant:** each output byte must be delivered to the client exactly once.\n\n**Correct order:**\n1. Snapshot replay buffer offset (`replayData, nextOffset = replay.readFrom(since)`)\n2. Call `AttachOutput()` — live pipe sink is now active\n3. Send `replay` frame\n4. Stream live output from pipe\n\n**Why:** bytes produced between snapshot and attach land in the live pipe only (not in the replay snapshot), so no byte appears in both. Reversing steps 1 and 2 causes duplicates.\n\n### 5.3 `os.Pipe` instead of `io.Pipe` for `run()`\n\n`exec.Cmd` internally spawns copy goroutines that write into the pipe after `cmd.Start()` returns. Closing an `io.PipeWriter` immediately after `Start()` causes \"write on closed pipe\" errors in those goroutines. `os.Pipe` uses a kernel buffer: closing the parent-side write fd is safe because the child holds its own fd copy; the reader sees EOF only when the child exits. This eliminates the scan↔Wait deadlock without breaking writes.\n\n### 5.4 Separate `wsPid` and `currentProcessPid`\n\n`run()` (fire-and-forget SSE) and `Start/StartPTY` (WS shell) can run concurrently. Using a single PID field would let `run()` clobber the WS shell's PID, breaking `IsRunning()`, `close()`, and `SendSignal()`. Two separate fields keep the two lifecycles independent.\n\n### 5.5 PTY mode\n\n`StartPTY()` uses `github.com/creack/pty` (`pty.StartWithSize`). The PTY master fd serves as both stdin (write) and stdout+stderr merged (read). Env vars `TERM=xterm-256color`, `COLUMNS=80`, `LINES=24` are injected. `ResizePTY` calls `pty.Setsize` with a `TIOCSWINSZ` ioctl.\n\nIn PTY mode:\n- `stderrW` is nil (stderr is merged into ptmx)\n- `AttachOutput()` returns `stderr = nil`\n- The WS handler skips the stderr pump goroutine\n- `resize` frames are forwarded to `ResizePTY`\n\n### 5.6 WS lock (`wsConnected atomic.Bool`)\n\nOnly one WS client per session at a time. `LockWS()` uses `CompareAndSwap(false, true)`. The lock is released **after** pump goroutines exit (`pumpWg.Wait()`), not on connection close, to prevent a reconnecting client from starting new pumps while stale ones are still running.\n\nLock is also released explicitly in error paths (upgrade failure, `Start()` failure) before returning.\n\n### 5.7 Exit watcher\n\nAfter the bash process exits, the handler:\n1. Sends `{\"type\":\"exit\",\"exit_code\":N}`\n2. Sends a WebSocket `CloseMessage` (normal closure)\n3. Calls `conn.Close()`\n\nThis unblocks `ReadJSON` immediately instead of waiting up to 60 s for the read deadline, eliminating the false \"session already connected\" window during reconnect after process exit.\n\n### 5.8 HTTP 404 before WS upgrade\n\nSession existence is checked **before** `wsUpgrader.Upgrade()`. Once the upgrade handshake completes, HTTP status codes can no longer be sent. Checking first allows returning a clean `404` for unknown sessions.\n\n---\n\n## 6. API Reference\n\n### REST\n\n```\nPOST   /session\n       Body: {\"cwd\": \"/opt/app\"}   (optional)\n       Response: {\"session_id\": \"<uuid>\"}\n\nGET    /session/:sessionId\n       Response: {\"session_id\":\"…\",\"running\":true,\"output_offset\":4096}\n\nPOST   /session/:sessionId/run?since=<offset>\n       Body: {\"code\":\"ls -la\",\"timeout_ms\":30000}\n       Response: SSE stream (stdout/stderr/complete events)\n\nDELETE /session/:sessionId\n       Response: 200 OK\n```\n\n### WebSocket\n\n```\nGET /ws/session/:sessionId?pty=1&since=<offset>\n```\n\n**Connection sequence:**\n```\nClient                          Server\n  |                               |\n  |-- GET /ws/session/:id ------> |\n  |                               | (404 if session missing)\n  |                               | (409 if already connected)\n  |<-- 101 Switching Protocols -- |\n  |                               | [start bash if not running]\n  |                               | [snapshot replay buffer]\n  |                               | [AttachOutput → live pipe active]\n  |<-- {\"type\":\"replay\",...} ---- | (if ?since provided and data available)\n  |<-- {\"type\":\"connected\",...} - |\n  |                               |\n  |<-- {\"type\":\"stdout\",...} ---- | (live output)\n  |-- {\"type\":\"stdin\",\"data\":\"ls\\n\"} -->\n  |<-- {\"type\":\"stdout\",\"data\":\"file1\\n\"} --\n  |-- {\"type\":\"resize\",\"cols\":120,\"rows\":40} -->\n  |-- {\"type\":\"signal\",\"signal\":\"SIGINT\"} -->\n  |<-- {\"type\":\"exit\",\"exit_code\":0} ---\n```\n\n---\n\n## 7. Implementation Phases\n\n### Phase 0.5 — Replay buffer\n- `replay_buffer.go` + tests\n- Wire `replay.write()` into `run()` stdout/stderr scanners\n- `GET /session/:id` returning `output_offset`\n- `?since=` support on `POST /session/:id/run`\n\n### Phase 1 — WebSocket pipe mode\n- `BashSession` interface in `types.go`\n- `Start()`, `LockWS/UnlockWS`, `AttachOutput`, `Done`, `ExitCode`, `WriteStdin`, `SendSignal` on `bashSession`\n- `session_ws.go` model + controller\n- `GET /ws/session/:id` handler (pipe mode only)\n- 5 WS tests: unknown session, ping/pong, stdin forwarding, replay on connect, exit frame\n\n### Phase 2 — PTY mode\n- Add `github.com/creack/pty` dependency\n- `StartPTY()`, `ResizePTY()`, `IsPTY()` on `bashSession`\n- Wire `?pty=1` in WS handler; skip stderr pump; handle `resize` frames\n- 4 PTY tests: basic execution, resize winsize, ANSI sequences, pipe mode unchanged\n\n### Phase 3 — Hardening (bug fixes from history)\n- Broadcast goroutine pattern replacing direct pipe hand-off (goroutine leak fix)\n- Correct replay-then-attach ordering (duplicate output fix)\n- `os.Pipe` for `run()` (deadlock fix)\n- Separate `wsPid` / `currentProcessPid` (data race fix)\n- Exit watcher `CloseMessage` (reconnect window fix)\n- fd leak fixes (close `stdoutR`/`stderrR` in broadcast goroutines)\n- `commandSnapshot` mutex fix (data race on status poll)\n- Windows build fix (move `GetBashSession` to `!windows` file)\n\n---\n\n## 8. Testing Strategy\n\n| Test | Location | What it covers |\n|------|----------|----------------|\n| Replay buffer unit tests | `replay_buffer_test.go` | write/read, circular eviction, caught-up offset, large gap, concurrent |\n| WS: unknown session | `session_ws_test.go` | HTTP 404 before upgrade |\n| WS: ping/pong | `session_ws_test.go` | application-level keepalive |\n| WS: stdin forwarding | `session_ws_test.go` | stdin → bash → stdout round-trip |\n| WS: replay on connect | `session_ws_test.go` | `?since=0` delivers prior output |\n| WS: exit frame | `session_ws_test.go` | exit frame + conn close on process exit |\n| PTY: basic execution | `bash_session_pty_test.go` | `echo` via PTY |\n| PTY: resize winsize | `bash_session_pty_test.go` | `stty size` reflects resize frame |\n| PTY: ANSI sequences | `bash_session_pty_test.go` | escape codes present in output |\n| PTY: pipe mode unchanged | `bash_session_pty_test.go` | `Start()` unaffected by PTY code |\n\nAll tests run with `-race` flag.\n\n---\n\n## 9. Dependencies\n\n| Package | Version | Use |\n|---------|---------|-----|\n| `github.com/gorilla/websocket` | v1.5.x | WebSocket upgrade + framing |\n| `github.com/creack/pty` | v1.1.24 | PTY start + resize |\n\nBoth are already present in the upstream `go.mod` after this feature.\n",
+            "file_path": "/home/sxf/code/github/OpenSandbox/docs/DESIGN-websocket-pty.md"
+          },
+          "timestamp": "2026-03-28T02:21:35.013Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Both documents are written. Here's a summary of what was captured:\n\n**`docs/PRD-websocket-pty.md`** — the \"what and why\":\n- 5 user stories (interactive shell, PTY/ANSI, resize, signal injection, reconnect+replay)\n- Full REST and WS API specs including all frame types and error codes\n- Functional + non-functional requirements\n- Acceptance criteria checklist\n\n**`docs/DESIGN-websocket-pty.md`** — the \"how\":\n- Architecture diagram\n- All new/modified files with their roles\n- Key data structures (`replayBuffer`, `BashSession` interface, `bashSession` struct fields)\n- 8 critical design decisions with rationale (broadcast goroutine pattern, replay-then-attach ordering, `os.Pipe` vs `io.Pipe`, separate `wsPid`/`currentProcessPid`, PTY mode, WS lock, exit watcher, pre-upgrade404)\n- 3 implementation phases (replay buffer → pipe mode WS → PTY → hardening)\n- Full test matrix\n\nWhen you start the re-implementation on a clean branch, the design doc's phases give you a natural commit sequence that mirrors what was proven to work on this branch.",
+          "timestamp": "2026-03-28T02:21:51.927Z"
+        },
+        {
+          "type": "user",
+          "text": "but we look https://github.com/alibaba/OpenSandbox/pull/455 comment.\nwe must implement a separate WebSocket flow instead of modifying the existing Session. meaning new api router and new impl bash session to using pty with websocket session. review the pr comment. and totally rewrite the new PRD and design docs.",
+          "timestamp": "2026-03-28T02:24:00.835Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Let me read the PR comments first.",
+          "timestamp": "2026-03-28T02:24:05.840Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Task",
+          "input": {
+            "description": "Fetch PR #455 comments from GitHub",
+            "prompt": "Fetch the pull request comments from https://github.com/alibaba/OpenSandbox/pull/455 and return ALL review comments, inline comments, and general discussion. I need the full text of every comment to understand the design feedback.",
+            "subagent_type": "agent-browser"
+          },
+          "timestamp": "2026-03-28T02:24:07.860Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "WebFetch",
+          "input": {
+            "prompt": "Extract ALL review comments, inline code comments, and discussion text from this pull request. I need every comment in full, especially any design feedback about WebSocket, PTY, session architecture, and API design.",
+            "url": "https://github.com/alibaba/OpenSandbox/pull/455"
+          },
+          "timestamp": "2026-03-28T02:24:14.404Z"
+        },
+        {
+          "type": "assistant",
+          "text": "I can't fetch the PR directly. Can you paste the PR review comments here? Either copy-paste the text or share a screenshot — I need the actual reviewer feedback to rewrite the docs correctly.",
+          "timestamp": "2026-03-28T02:24:21.269Z"
+        },
+        {
+          "type": "user",
+          "text": "you can using gh command line to get pr comments",
+          "timestamp": "2026-03-28T02:24:44.331Z"
+        },
+        {
+          "type": "assistant",
+          "text": ".",
+          "timestamp": "2026-03-28T02:24:49.142Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "gh pr view 455 --repo alibaba/OpenSandbox --comments 2>/dev/null",
+            "description": "Fetch PR 455 comments via gh CLI"
+          },
+          "timestamp": "2026-03-28T02:24:50.117Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Now I have the key comment. `@Pangjiping` (collaborator) said:\n\n> \"Maybe you should implement a separate WebSocket flow instead of modifying the existing `RunInSession`.\"\n\nAnd `@danieliser` deferred to them. Let me also get the inline review comments.",
+          "timestamp": "2026-03-28T02:24:58.303Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "gh api repos/alibaba/OpenSandbox/pulls/455/reviews 2>/dev/null | python3 -m json.tool | head -200",
+            "description": "Get formal PR reviews"
+          },
+          "timestamp": "2026-03-28T02:24:59.585Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "gh api repos/alibaba/OpenSandbox/pulls/455/comments 2>/dev/null | python3 -c \"\nimport json, sys\ncomments = json.load(sys.stdin)\nfor c in comments:\n    print('=== FILE:', c.get('path',''))\n    print('LINE:', c.get('line',''), 'SIDE:', c.get('side',''))\n    print('AUTHOR:', c.get('user',{}).get('login',''))\n    print('BODY:', c.get('body',''))\n    print()\n\"",
+            "description": "Get inline PR review comments"
+          },
+          "timestamp": "2026-03-28T02:25:01.431Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Now I have everything. The core directive from `@Pangjiping` is clear: **separate WebSocket flow, don't modify existing `RunInSession`**. Let me rewrite both docs.",
+          "timestamp": "2026-03-28T02:25:15.328Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5:components/execd/pkg/web/router.go 2>/dev/null | grep -A5 \"session\"",
+            "description": "Check what session routes existed at the base commit"
+          },
+          "timestamp": "2026-03-28T02:25:18.128Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Bash",
+          "input": {
+            "command": "git show 381bcf8b39909d9c06bd5c5f9f0483bb4fdee5e5:components/execd/pkg/runtime/types.go 2>/dev/null",
+            "description": "Check types at base commit"
+          },
+          "timestamp": "2026-03-28T02:25:19.004Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Now I have the full picture. The base already has `POST /session`, `POST /session/:id/run`, `DELETE /session/:id` and a plain `bashSession` with no WS fields. The directive is: **don't touch any of that — add a completely separate WS PTY flow**. Rewriting both docs now.",
+          "timestamp": "2026-03-28T02:25:27.408Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Write",
+          "input": {
+            "content": "# PRD: WebSocket PTY Terminal for execd\n\n**Status:** Ready for re-implementation (replaces dropped `tty-fork` branch)\n**Key directive (PR #455 @Pangjiping):** Implement a **separate** WebSocket flow. Do NOT modify the existing `RunInSession` / `bashSession` machinery.\n\n---\n\n## 1. Background\n\n`execd` already provides a stateful bash session API:\n\n| Endpoint | Purpose |\n|----------|---------|\n| `POST /session` | Create a bash session |\n| `POST /session/:id/run` | Fire-and-forget code execution, SSE output stream |\n| `DELETE /session/:id` | Destroy session |\n\nThis API is fire-and-forget: each `/run` call spawns a fresh child process, captures its output, and returns. It cannot support:\n\n- Interactive programs (REPLs, `vim`, `htop`, `ssh`) that need a live terminal\n- Real-time stdin injection while a process is running\n- Full ANSI/cursor-control sequences (PTY echo, colors, progress bars)\n- Persistent shell state across reconnects\n\n## 2. Directive from PR #455\n\n> \"Maybe you should implement a separate WebSocket flow instead of modifying the existing `RunInSession`.\"\n> — @Pangjiping (collaborator)\n\n**This means:**\n- The existing `bashSession` struct, `RunInSession`, and all existing session endpoints are **untouched**\n- The WS PTY feature lives in its own types, its own controller file, and its own router group\n- The two flows share only the session ID namespace (same `sync.Map` store is fine) but have independent lifecycles\n\n## 3. Goals\n\n| # | Goal |\n|---|------|\n| G1 | New `GET /pty/:sessionId` WebSocket endpoint for bidirectional PTY terminal access |\n| G2 | PTY sessions are **independent** of the existing `/session/:id/run` flow — no shared state, no shared structs |\n| G3 | Support both **PTY mode** (full terminal via `/dev/ptmx`, default) and **pipe mode** (plain stdin/stdout/stderr, opt-out) |\n| G4 | Allow clients to **reconnect** and replay missed output via a circular replay buffer |\n| G5 | Zero modifications to existing `bashSession`, `RunInSession`, `CreateSession`, `DeleteSession` |\n| G6 | Windows build must not break (stubs for all new symbols) |\n\n## 4. Non-Goals\n\n- Modifying `POST /session/:id/run` or `bashSession.run()`\n- Client-side terminal emulator\n- Multi-client fan-out (one WS connection per PTY session at a time)\n- Persistent sessions across daemon restarts\n\n## 5. User Stories\n\n**US1 – Interactive terminal**\nAs an agent, I open a WebSocket to `/pty/:id` and get a live bash terminal. I can type commands, see prompts, and interact with programs that require a TTY.\n\n**US2 – Full ANSI output**\nAs a client, I receive raw PTY bytes including ANSI escape codes, cursor movements, and color sequences — identical to a real terminal.\n\n**US3 – Terminal resize**\nAs a client, I send a `resize` frame to update `COLUMNS`/`LINES` so programs like `htop` and `man` lay out correctly.\n\n**US4 – Signal injection**\nAs a client, I send a `signal` frame (e.g. `SIGINT`) to interrupt the running process inside the PTY session.\n\n**US5 – Reconnect with replay**\nAfter a network drop, I reconnect with `?since=<offset>` and receive all output I missed without restarting the session.\n\n**US6 – Pipe mode fallback**\nOn environments where PTY setup is unavailable, I connect with `?pty=0` to get separate stdout/stderr pipes instead of a merged PTY stream.\n\n**US7 – No interference with existing API**\nExisting `/session/:id/run` calls continue to work exactly as before, on the same session ID, without any behavioral change.\n\n## 6. Functional Requirements\n\n### 6.1 New PTY Session Lifecycle (separate from existing `/session`)\n\nThe PTY session is created implicitly on first WebSocket connect, or explicitly via a new REST endpoint:\n\n| Method | Endpoint | Description |\n|--------|----------|-------------|\n| POST | `/pty` | Create a PTY session; returns `session_id` |\n| GET | `/pty/:sessionId` | Get PTY session status + replay buffer offset |\n| DELETE | `/pty/:sessionId` | Terminate and delete PTY session |\n| GET (WS) | `/pty/:sessionId/ws` | WebSocket terminal connection |\n\n> The `/pty` namespace is fully separate from `/session`. A PTY session ID and a bash session ID are independent.\n\n### 6.2 WebSocket Endpoint\n\n`GET /pty/:sessionId/ws[?pty=0][&since=<offset>]`\n\n- HTTP 404 **before** upgrade if session does not exist\n- HTTP 409 **before** upgrade if another client is already connected\n- Default mode: PTY (`?pty=0` opts into pipe mode)\n- `?since=<offset>`: replay missed bytes from that offset on connect\n\n### 6.3 WebSocket Framing Protocol\n\n**Client → Server (JSON):**\n\n| `type` | Fields | Action |\n|--------|--------|--------|\n| `stdin` | `data: string` | Write bytes to bash stdin / PTY master |\n| `signal` | `signal: string` | Send named signal to process group (SIGINT, SIGTERM, SIGKILL, SIGQUIT, SIGHUP) |\n| `resize` | `cols: int`, `rows: int` | Resize PTY window (PTY mode only; silently ignored in pipe mode) |\n| `ping` | — | Application-level keepalive |\n\n**Server → Client (JSON):**\n\n| `type` | Fields | Meaning |\n|--------|--------|---------|\n| `connected` | `session_id`, `mode: \"pty\"\\|\"pipe\"` | First frame after upgrade |\n| `replay` | `data: string`, `offset: int64` | Missed output since requested offset |\n| `stdout` | `data: string`, `timestamp: int64` | Live output chunk (PTY: merged; pipe: stdout only) |\n| `stderr` | `data: string`, `timestamp: int64` | Live stderr (pipe mode only) |\n| `exit` | `exit_code: int` | Shell process exited |\n| `pong` | — | Response to application-level ping |\n| `error` | `error: string`, `code: string` | Error frame |\n\n**Error codes:**\n\n| Code | Meaning |\n|------|---------|\n| `SESSION_GONE` | Session deleted while connected |\n| `START_FAILED` | Failed to start bash process |\n| `STDIN_WRITE_FAILED` | Write to stdin failed |\n| `INVALID_FRAME` | Unknown frame type |\n| `ALREADY_CONNECTED` | Another client holds the WS lock |\n| `RUNTIME_ERROR` | Internal read/write error |\n\n### 6.4 Keepalive\n\n- RFC 6455 binary ping every 30 s; 60 s read deadline reset on pong\n- Application-level `ping`/`pong` frames in parallel\n\n### 6.5 Reconnect Semantics\n\n1. Client disconnects; PTY bash process stays alive\n2. Output continues accumulating in the replay buffer\n3. Client reconnects with `?since=<last_offset>`\n4. Server sends `replay` frame with all missed bytes, then streams live output\n5. Each byte is delivered **exactly once** — no duplicates, no gaps\n\n### 6.6 Output Delivery\n\n- Raw byte chunks (not line-buffered) — PTY prompts and control sequences delivered immediately\n- Chunk size: up to 32 KiB per read\n- Replay buffer: 1 MiB circular; oldest bytes evicted when full\n- Output written to replay buffer **before** fanout to the active WS connection\n\n### 6.7 Constraints from PR review\n\nThe following bugs from the dropped branch must **not** be reproduced:\n\n| Bug | Constraint |\n|-----|-----------|\n| Goroutine leak on disconnect | Pump goroutines must exit before `UnlockWS()` is called |\n| Duplicate output on reconnect | Snapshot replay buffer **before** `AttachOutput()`, not after |\n| WS lock not released on upgrade failure | Release lock in all error paths before returning |\n| WS lock not released on `Start()` failure | Release lock explicitly before error return |\n| `run()` scan↔Wait deadlock | Use `os.Pipe` (not `io.Pipe`) for `run()` — but this is in the existing flow, not our concern |\n| PTY `Setpgid+Setsid` EPERM | Do NOT set `Setpgid` when using `pty.StartWithSize` (it sets `Setsid` internally) |\n| `running` status wrong | Derive from live PID, not `started` bool |\n| fd leaks | Close all pipe read/write ends when no longer needed |\n\n## 7. Acceptance Criteria\n\n- [ ] `GET /pty/:id/ws` upgrades to WS and delivers `connected` frame with `mode:\"pty\"`\n- [ ] Typing in stdin appears as output from bash\n- [ ] ANSI escape sequences present in stdout frames (PTY mode)\n- [ ] `resize` frame changes PTY dimensions (verified via `stty size` inside bash)\n- [ ] `signal` SIGINT interrupts a running command\n- [ ] Disconnect + reconnect with `?since=0` delivers all prior output exactly once, no duplicates\n- [ ] `?pty=0` delivers separate stdout/stderr frames\n- [ ] Existing `POST /session/:id/run` behavior is completely unchanged\n- [ ] `go test -race ./...` passes with no data-race reports\n- [ ] `GOOS=windows go build ./...` succeeds\n",
+            "file_path": "/home/sxf/code/github/OpenSandbox/docs/PRD-websocket-pty.md"
+          },
+          "timestamp": "2026-03-28T02:26:18.442Z"
+        },
+        {
+          "type": "assistant",
+          "text": ".",
+          "timestamp": "2026-03-28T02:26:55.639Z"
+        },
+        {
+          "type": "tool_use",
+          "name": "Write",
+          "input": {
+            "content": "# Design: WebSocket PTY Terminal for execd\n\n**Status:** Ready for re-implementation\n**Companion:** [PRD-websocket-pty.md](./PRD-websocket-pty.md)\n**Key constraint:** Zero modifications to existing `bashSession`, `RunInSession`, or any `/session/*` code.\n\n---\n\n## 1. Architecture Overview\n\n```\n┌─────────────────────────────────────────────────────────────────┐\n│  execd HTTP server (Gin)                                         │\n│                                                                  │\n│  EXISTING (untouched)          NEW                               │\n│  ─────────────────────         ──────────────────────────────    │\n│  /session/*                    /pty/*                            │\n│    CreateSession                 CreatePTYSession                │\n│    RunInSession (SSE)            GetPTYSessionStatus             │\n│    DeleteSession                 DeletePTYSession                │\n│                                  PTYSessionWebSocket (WS)        │\n│                                                                  │\n│  runtime.Controller                                              │\n│  ├── bashSessionClientMap   (existing, untouched)                │\n│  └── ptySessionMap          (NEW: sync.Map[id → *ptySession])    │\n│       └── *ptySession                                            │\n│            ├── replayBuffer  (1 MiB circular)                    │\n│            ├── broadcast goroutine  ← PTY master / OS pipes      │\n│            ├── per-connection io.Pipe  ← AttachOutput()          │\n│            └── bash process  (PTY mode or pipe mode)             │\n└─────────────────────────────────────────────────────────────────┘\n```\n\n---\n\n## 2. New Files (nothing existing is modified)\n\n| File | Purpose |\n|------|---------|\n| `pkg/runtime/pty_session.go` | `ptySession` struct + all methods; build tag `!windows` |\n| `pkg/runtime/pty_session_windows.go` | Windows stubs for all new `Controller` methods |\n| `pkg/runtime/pty_session_test.go` | Unit + integration tests for PTY session |\n| `pkg/runtime/replay_buffer.go` | 1 MiB circular replay buffer (shared utility) |\n| `pkg/runtime/replay_buffer_test.go` | Replay buffer unit tests |\n| `pkg/web/model/pty.go` | REST request/response models for `/pty/*` |\n| `pkg/web/model/pty_ws.go` | `ClientFrame` / `ServerFrame` types + WS error codes |\n| `pkg/web/controller/pty_controller.go` | REST handlers: Create, Status, Delete |\n| `pkg/web/controller/pty_ws.go` | `PTYSessionWebSocket` handler |\n| `pkg/web/controller/pty_ws_test.go` | WS handler integration tests |\n\n**Modified files (minimal):**\n\n| File | Change |\n|------|--------|\n| `pkg/runtime/ctrl.go` | Add `ptySessionMap sync.Map`; add `CreatePTYSession`, `GetPTYSession`, `DeletePTYSession`, `GetPTYSessionStatus`, `ReplayPTYOutput` methods |\n| `pkg/web/router.go` | Register `/pty/*` and `/pty/:id/ws` routes |\n| `go.mod` / `go.sum` | Add `github.com/gorilla/websocket` and `github.com/creack/pty` |\n\n---\n\n## 3. Data Structures\n\n### 3.1 `replayBuffer`\n\n```go\n// pkg/runtime/replay_buffer.go\ntype replayBuffer struct {\n    mu    sync.Mutex\n    buf   []byte // circular, capacity = 1 MiB\n    size  int\n    head  int   // next write position (mod size)\n    total int64 // monotonic byte counter\n}\n\nfunc (r *replayBuffer) write(p []byte)\nfunc (r *replayBuffer) Total() int64                          // mutex-guarded\nfunc (r *replayBuffer) readFrom(offset int64) ([]byte, int64) // clamps to oldest if evicted\n```\n\n### 3.2 `ptySession` struct\n\n```go\n// pkg/runtime/pty_session.go  (build tag: !windows)\ntype ptySession struct {\n    id      string\n    cwd     string\n    mu      sync.Mutex\n    closing bool\n\n    // Process tracking\n    pid          int            // PID of the running bash process (0 = not running)\n    lastExitCode int            // -1 until first exit\n    doneCh       chan struct{}   // closed when process exits\n\n    // Stdin\n    stdin io.WriteCloser // pipe write end (pipe mode) or PTY master (PTY mode)\n\n    // PTY\n    isPTY bool\n    ptmx  *os.File // PTY master fd; nil in pipe mode\n\n    // Replay\n    replay *replayBuffer\n\n    // WS exclusive lock\n    wsConnected atomic.Bool\n\n    // Output broadcast (guards stdoutW / stderrW)\n    outMu   sync.Mutex\n    stdoutW *io.PipeWriter // current per-connection sink; nil when no client attached\n    stderrW *io.PipeWriter // nil in PTY mode\n}\n```\n\n### 3.3 `PTYSession` interface (exposed to controller)\n\n```go\ntype PTYSession interface {\n    LockWS() bool\n    UnlockWS()\n    StartPTY() error          // launch bash via pty.StartWithSize\n    StartPipe() error         // launch bash with os.Pipe stdin/stdout/stderr\n    IsRunning() bool          // true iff pid != 0\n    IsPTY() bool\n    ExitCode() int\n    WriteStdin(p []byte) (int, error)\n    AttachOutput() (stdout io.Reader, stderr io.Reader, detach func())\n    Done() <-chan struct{}\n    SendSignal(name string)\n    ResizePTY(cols, rows uint16) error\n    ReplayBuffer() *replayBuffer\n}\n```\n\n### 3.4 REST models\n\n```go\n// pkg/web/model/pty.go\ntype CreatePTYSessionRequest struct {\n    Cwd string `json:\"cwd,omitempty\"`\n}\ntype CreatePTYSessionResponse struct {\n    SessionID string `json:\"session_id\"`\n}\ntype PTYSessionStatusResponse struct {\n    SessionID    string `json:\"session_id\"`\n    Running      bool   `json:\"running\"`   // derived from pid != 0\n    OutputOffset int64  `json:\"output_offset\"`\n}\n```\n\n### 3.5 WS frame models\n\n```go\n// pkg/web/model/pty_ws.go\ntype ClientFrame struct {\n    Type   string `json:\"type\"`\n    Data   string `json:\"data,omitempty\"`\n    Cols   int    `json:\"cols,omitempty\"`\n    Rows   int    `json:\"rows,omitempty\"`\n    Signal string `json:\"signal,omitempty\"`\n}\ntype ServerFrame struct {\n    Type      string `json:\"type\"`\n    SessionID string `json:\"session_id,omitempty\"`\n    Mode      string `json:\"mode,omitempty\"`\n    Data      string `json:\"data,omitempty\"`\n    Offset    int64  `json:\"offset,omitempty\"`\n    ExitCode  *int   `json:\"exit_code,omitempty\"`\n    Error     string `json:\"error,omitempty\"`\n    Code      string `json:\"code,omitempty\"`\n    Timestamp int64  `json:\"timestamp,omitempty\"`\n}\nconst (\n    WSErrCodeSessionGone      = \"SESSION_GONE\"\n    WSErrCodeStartFailed      = \"START_FAILED\"\n    WSErrCodeStdinWriteFailed = \"STDIN_WRITE_FAILED\"\n    WSErrCodeInvalidFrame     = \"INVALID_FRAME\"\n    WSErrCodeAlreadyConnected = \"ALREADY_CONNECTED\"\n    WSErrCodeRuntimeError     = \"RUNTIME_ERROR\"\n)\n```\n\n---\n\n## 4. Key Design Decisions\n\n### 4.1 Complete separation from existing `bashSession`\n\n`ptySession` is a new, independent type in `pkg/runtime/pty_session.go`. It does not embed or extend `bashSession`. The `Controller` gets a new `ptySessionMap sync.Map` alongside the existing `bashSessionClientMap`. No existing method signatures change.\n\n### 4.2 Broadcast goroutine pattern\n\n`StartPTY()` / `StartPipe()` each launch a **broadcast goroutine** that owns the real OS fd (PTY master or `os.Pipe` read end). It reads in 32 KiB chunks and:\n\n1. Always writes to `s.replay` first\n2. Then writes to `s.stdoutW` / `s.stderrW` (the current per-connection `io.PipeWriter`) if non-nil\n\n`AttachOutput()` creates a fresh `io.Pipe` per connection and atomically swaps in the writer. `detach()` closes the writer, sending EOF to the handler's reader — unblocking pump goroutines immediately without touching the OS fd.\n\nThis eliminates the goroutine-leak bug from the dropped branch where `bufio.Scanner` goroutines outlived the WS connection.\n\n### 4.3 Replay-then-attach ordering (no duplicates)\n\n```\n1. snapshot = replay.readFrom(since)   // watermark captured\n2. stdout, stderr, detach = AttachOutput()  // live sink now active\n3. send replay frame (snapshot bytes)\n4. stream live from stdout/stderr readers\n```\n\nBytes produced between steps 1 and 2 land in the live pipe only (not in the snapshot), so each byte is delivered exactly once. Reversing steps 1 and 2 causes duplicates — a bug present in the dropped branch that must not recur.\n\n### 4.4 `os.Pipe` for process I/O\n\nUse `os.Pipe()` (kernel-buffered) not `io.Pipe()` (goroutine-coupled) for the bash process's stdin/stdout/stderr in pipe mode. After `cmd.Start()`, close the parent-side write ends immediately — the child holds its own fd copies, so the reader sees EOF only when the child exits. This avoids the scan↔Wait deadlock.\n\n### 4.5 PTY: no `Setpgid`\n\n`pty.StartWithSize` internally sets `Setsid=true`. Combining `Setsid+Setpgid` causes `EPERM` (setpgid is illegal for a session leader). Do **not** set `cmd.SysProcAttr.Setpgid = true` in `StartPTY()`. After `setsid()`, `pgid == pid` automatically, so `Kill(-pid, sig)` in `SendSignal` still works.\n\n### 4.6 WS exclusive lock\n\n`wsConnected atomic.Bool` — `LockWS()` uses `CompareAndSwap(false, true)`. The lock is released **after** pump goroutines exit (`pumpWg.Wait()`), not on connection close. This prevents a reconnecting client from starting new pumps while stale ones are still running.\n\nLock must be released explicitly in **all** error paths:\n- Upgrade failure → `session.UnlockWS()` before return\n- `StartPTY()` / `StartPipe()` failure → `session.UnlockWS()` before return\n\n### 4.7 Exit watcher closes connection immediately\n\nAfter the bash process exits:\n1. Send `{\"type\":\"exit\",\"exit_code\":N}`\n2. Send WebSocket `CloseMessage` (normal closure)\n3. Call `conn.Close()`\n\nThis unblocks `ReadJSON` immediately instead of waiting up to 60 s for the read deadline, eliminating the false \"session already connected\" window during reconnect after process exit.\n\n### 4.8 HTTP 404 before upgrade\n\nCheck session existence **before** `wsUpgrader.Upgrade()`. Once the upgrade handshake completes, HTTP status codes can no longer be sent.\n\n### 4.9 `Running` status from live PID\n\n`GetPTYSessionStatus` derives `Running` from `session.pid != 0`, not from a `started` bool. This accurately reflects whether the process is alive, not just whether it was ever started.\n\n---\n\n## 5. WS Handler Flow\n\n```\nPTYSessionWebSocket():\n  1. Look up ptySession by ID → 404 if missing\n  2. session.LockWS()         → 409 if already locked\n  3. wsUpgrader.Upgrade()     → on fail: UnlockWS(), return\n  4. if !session.IsRunning():\n       if ?pty=0: session.StartPipe() else: session.StartPTY()\n       on fail: send error frame, UnlockWS(), return\n  5. snapshot = replay.readFrom(?since)   // step A: snapshot first\n  6. stdout, stderr, detach = AttachOutput()  // step B: attach second\n  7. defer: cancel() → detach() → pumpWg.Wait() → UnlockWS()\n  8. if snapshot: send replay frame\n  9. send connected frame (mode from session.IsPTY())\n  10. start RFC 6455 ping goroutine (30s interval)\n  11. pumpWg.Add(1); go streamPump(stdout, \"stdout\")\n  12. if stderr != nil: pumpWg.Add(1); go streamPump(stderr, \"stderr\")\n  13. go exitWatcher()  // sends exit frame + CloseMessage + conn.Close()\n  14. read loop: ReadJSON → dispatch stdin/signal/resize/ping frames\n```\n\n`streamPump` reads raw 32 KiB chunks (not line-scanned) and writes `ServerFrame` JSON to the WS connection. Exits on `io.EOF` or `ctx.Done()`.\n\n---\n\n## 6. API Reference\n\n### REST\n\n```\nPOST   /pty\n       Body: {\"cwd\": \"/opt/app\"}   (optional)\n       201: {\"session_id\": \"<uuid>\"}\n\nGET    /pty/:sessionId\n       200: {\"session_id\":\"…\",\"running\":true,\"output_offset\":4096}\n       404: session not found\n\nDELETE /pty/:sessionId\n       200: {}\n       404: session not found\n```\n\n### WebSocket\n\n```\nGET /pty/:sessionId/ws?pty=0&since=<offset>\n    pty=0   → pipe mode (default: PTY mode)\n    since   → replay from this byte offset\n```\n\n**Connection sequence:**\n```\nClient                              Server\n  |                                   |\n  |-- GET /pty/:id/ws ------------->  |\n  |                                   | 404 if session missing\n  |                                   | 409 if already connected\n  |<-- 101 Switching Protocols -----  |\n  |                                   | [StartPTY or StartPipe if not running]\n  |                                   | [snapshot replay buffer]\n  |                                   | [AttachOutput → live pipe active]\n  |<-- {\"type\":\"replay\",...} -------  | (if ?since and data available)\n  |<-- {\"type\":\"connected\",\"mode\":\"pty\",...}\n  |                                   |\n  |<-- {\"type\":\"stdout\",\"data\":\"$ \"}  | (PTY prompt)\n  |-- {\"type\":\"stdin\",\"data\":\"ls\\n\"} >|\n  |<-- {\"type\":\"stdout\",\"data\":\"...\"}  |\n  |-- {\"type\":\"resize\",\"cols\":120,\"rows\":40}\n  |-- {\"type\":\"signal\",\"signal\":\"SIGINT\"}\n  |<-- {\"type\":\"exit\",\"exit_code\":0}  |\n```\n\n---\n\n## 7. Implementation Phases\n\n### Phase 1 — Replay buffer\n- `pkg/runtime/replay_buffer.go` + `replay_buffer_test.go`\n- 5 tests: write/read, circular eviction, caught-up offset, large gap, concurrent\n\n### Phase 2 — PTY session core\n- `pkg/runtime/pty_session.go`: `ptySession` struct, `StartPTY()`, `StartPipe()`, `AttachOutput()`, `LockWS/UnlockWS`, `WriteStdin`, `SendSignal`, `ResizePTY`, `IsPTY`, `IsRunning`, `ExitCode`, `Done`\n- `pkg/runtime/pty_session_windows.go`: stubs\n- Wire `ptySessionMap` into `Controller` in `ctrl.go`\n- `pkg/runtime/pty_session_test.go`: PTY basic execution, resize, ANSI sequences, pipe mode, reconnect replay\n\n### Phase 3 — REST endpoints\n- `pkg/web/model/pty.go`\n- `pkg/web/controller/pty_controller.go`: `CreatePTYSession`, `GetPTYSessionStatus`, `DeletePTYSession`\n- Register `/pty` routes in `router.go`\n\n### Phase 4 — WebSocket handler\n- `pkg/web/model/pty_ws.go`\n- `pkg/web/controller/pty_ws.go`: `PTYSessionWebSocket`\n- `pkg/web/controller/pty_ws_test.go`: unknown session (404), already connected (409), ping/pong, stdin forwarding, replay on reconnect, exit frame, PTY resize\n- Register `/pty/:id/ws` route in `router.go`\n\n---\n\n## 8. Testing Strategy\n\n| Test | File | Covers |\n|------|------|--------|\n| Replay buffer: write/read | `replay_buffer_test.go` | basic round-trip |\n| Replay buffer: circular eviction | `replay_buffer_test.go` | oldest bytes overwritten |\n| Replay buffer: caught-up offset | `replay_buffer_test.go` | returns nil when current |\n| Replay buffer: large gap | `replay_buffer_test.go` | clamps to oldest available |\n| Replay buffer: concurrent | `replay_buffer_test.go` | race-free under `-race` |\n| PTY: basic execution | `pty_session_test.go` | `echo` via PTY |\n| PTY: resize winsize | `pty_session_test.go` | `stty size` reflects resize |\n| PTY: ANSI sequences | `pty_session_test.go` | escape codes in output |\n| PTY: pipe mode | `pty_session_test.go` | separate stdout/stderr |\n| PTY: reconnect replay | `pty_session_test.go` | AttachOutput after disconnect |\n| WS: 404 before upgrade | `pty_ws_test.go` | unknown session |\n| WS: 409 already connected | `pty_ws_test.go` | concurrent connect |\n| WS: ping/pong | `pty_ws_test.go` | application keepalive |\n| WS: stdin forwarding | `pty_ws_test.go` | stdin → bash → stdout |\n| WS: replay on reconnect | `pty_ws_test.go` | `?since=0` exact-once delivery |\n| WS: exit frame + close | `pty_ws_test.go` | immediate unblock on exit |\n| WS: resize frame | `pty_ws_test.go` | PTY winsize updated |\n\nAll tests run with `-race`.\n\n---\n\n## 9. Dependencies\n\n| Package | Version | Use |\n|---------|---------|-----|\n| `github.com/gorilla/websocket` | v1.5.x | WebSocket upgrade + framing |\n| `github.com/creack/pty` | v1.1.24 | PTY start (`pty.StartWithSize`) + resize (`pty.Setsize`) |\n",
+            "file_path": "/home/sxf/code/github/OpenSandbox/docs/DESIGN-websocket-pty.md"
+          },
+          "timestamp": "2026-03-28T02:28:15.980Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Both docs are fully rewritten and saved:\n\n**`docs/PRD-websocket-pty.md`** — what to build:\n- Separate `/pty/*` namespace, zero touch to existing `/session/*`\n- 7 user stories, full WS frame protocol, error codes\n- Explicit list of bugs from the dropped branch that must not recur\n- Acceptance criteria checklist\n\n**`docs/DESIGN-websocket-pty.md`** — how to build it:\n- New `ptySession` type (independent from `bashSession`) + `ptySessionMap` on `Controller`\n- All new files listed; only `ctrl.go` and `router.go` get minimal additions\n- 9 design decisions with rationale (broadcast goroutine, replay-then-attach ordering, `os.Pipe`, no `Setpgid` with PTY, WS lock discipline, exit watcher, etc.)\n- 4 implementation phases with clear scope\n- Full test matrix (17 tests)\n\nReady to start implementation whenever you are. The natural starting point is Phase 1 — `replay_buffer.go`.",
+          "timestamp": "2026-03-28T02:28:42.328Z"
+        }
+      ],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 561,
+      "overriden_lines": 0
+    }
+  }
+}
