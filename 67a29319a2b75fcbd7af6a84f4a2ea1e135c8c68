@@ -1,0 +1,86 @@
+components/execd/pkg/web/controller/pty_controller.go
+  7f9d92dbca13216a 1-124
+components/execd/pkg/runtime/ctrl.go
+  7f9d92dbca13216a 45
+components/execd/pkg/web/router.go
+  7f9d92dbca13216a 86-93,115-120
+components/execd/go.mod
+  7f9d92dbca13216a 8
+components/execd/pkg/runtime/pty_session_test.go
+  7f9d92dbca13216a 1-342
+components/execd/pkg/runtime/replay_buffer_test.go
+  7f9d92dbca13216a 1-154
+components/execd/pkg/runtime/pty_session_windows.go
+  7f9d92dbca13216a 1-64
+components/execd/pkg/web/controller/pty_ws_test.go
+  7f9d92dbca13216a 1-381
+components/execd/pkg/runtime/pty_session.go
+  7f9d92dbca13216a 1-101,103-520
+components/execd/pkg/web/model/pty_ws.go
+  7f9d92dbca13216a 1-47
+components/execd/pkg/web/model/pty.go
+  7f9d92dbca13216a 1-32
+components/execd/pkg/web/controller/pty_ws.go
+  7f9d92dbca13216a 1-339
+components/execd/pkg/runtime/replay_buffer.go
+  7f9d92dbca13216a 1-125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.20",
+  "base_commit_sha": "67a29319a2b75fcbd7af6a84f4a2ea1e135c8c68",
+  "prompts": {
+    "3086a2a9f0ed89f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ad686027-afcd-4346-bc01-ce7c76f8dceb",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 293,
+      "total_deletions": 0,
+      "accepted_lines": 293,
+      "overriden_lines": 0
+    },
+    "7f9d92dbca13216a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4f8f38c-01aa-4a5b-8614-d257def49c4f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 2504,
+      "total_deletions": 338,
+      "accepted_lines": 2143,
+      "overriden_lines": 1
+    },
+    "befb03e2a7f073dc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c42e7cf1-f8f7-4343-ae69-e18f46264d41",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "fa92bf49462e10b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b6be477-a67e-40cd-bdae-7086275737b1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Jon <ljp@sangfor.com.cn>",
+      "messages": [],
+      "total_additions": 828,
+      "total_deletions": 267,
+      "accepted_lines": 561,
+      "overriden_lines": 0
+    }
+  }
+}
